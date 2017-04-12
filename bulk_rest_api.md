@@ -11,11 +11,11 @@ Please see [Accepted CSV Fields](#acceptedfields) for a description of the colum
 
 The more data fields included, the better the records can be analyzed.
 
-##Important Information:
+## Important Information:
 
 If the "export_type" is "single" the results are not 'segmented' in the same manner "multi". It is up to the implementor to examine the results.csv and handle the data accordingly (including separating out any blacklisted entries).
 
-We recommend only contacting results with the following properties:
+It is recommend to only contact subscribers with the following properties:
 
 1. subscriber_score_bucket of 'high'
 2. subscriber_email_status of 'verified'
