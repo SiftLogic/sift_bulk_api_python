@@ -1,7 +1,7 @@
 
 &nbsp;
 
-#Bulk REST API
+# Bulk REST API
 
 **The Authentication Token must be sent as the "x-authorization" HTTP Header.**
 
@@ -21,7 +21,7 @@ We recommend only contacting results with the following properties:
 2. subscriber_email_status of 'verified'
 3. No blacklist hits (examine the following fields: subscriber_email_is_blacklisted, subscriber_email_domain_is_blacklisted, subscriber_signup_domain_is_blacklisted, subscriber_signup_ip_is_blacklisted)
 
-##File Format:
+## File Format:
 
 Any file being uploaded must be a correctly formatted Comma Separated Value file (CSV) using *UTF-8 encoding*. See [RFC 4180](http://tools.ietf.org/html/rfc4180). At a minimum, Email is required. We suggest including CAN-SPAM required fields and the API Key can be configured to enforce those requirements. For a list of allowed fields and their descriptions see [Accepted CSV Fields](#acceptedfields).
 
@@ -49,7 +49,7 @@ We have a desktop application available for formatting CSV files available (cont
 8. Be careful with time stamps and dates. If you're storing your time stamps and dates as a unix time integer, make sure to *not* send 1970-01-01 00:00:00. Just send an empty value
 
 
-##Endpoints:
+## Endpoints:
 
 **IMPORTANT** The API Endpoint when viewing the Auth details of the API Key will end in 'verify'. This *must* be changed to 'bulk'
 
@@ -63,7 +63,7 @@ DELETE to /api/live/bulk/ID (Delete job files)
 
 GET to /api/live/bulk/ID/download (Download Job Results)
 
-###Errors:
+### Errors:
 
 Any error, no matter the HTTP code, should return a JSON object in the form:
 ```javascript
@@ -75,7 +75,7 @@ Any error, no matter the HTTP code, should return a JSON object in the form:
 ```
 
 
-##List all Jobs [200]:
+## List all Jobs [200]:
   No Jobs:
 ```javascript
     {
@@ -119,7 +119,7 @@ Any error, no matter the HTTP code, should return a JSON object in the form:
 >  * pending
 
 
-##Create a new job:
+## Create a new job:
 
 Creating a job is done as a multipart form POST (encoding multipart/form-data).
 
@@ -132,7 +132,7 @@ Parts of the POST operation:
 5. The **"x-authorization" HTTP header** must be set for all operations. The value of this field is the API Key Authentication Token
 
 
-###Responses
+### Responses
 
 Success Response [202] (when file is < 500k lines):
 ```javascript
@@ -188,7 +188,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 >  * out_of_credits
 
 
-##Get the status of a Job:
+## Get the status of a Job:
   Failure [404] if the job is not found:
 ```javascript
     {
@@ -218,9 +218,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
     }
 ```
 
-\pagebreak
-
-##Delete the source and results files for a job once you've downloaded successfully:
+## Delete the source and results files for a job once you've downloaded successfully:
   Failure [404] if the job is not found
 ```javascript
     {
@@ -245,7 +243,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
     }
 ```
 
-##Download the results **when the job is completed**:
+## Download the results **when the job is completed**:
   Failure [404] - Job not found
 ```javascript
     {
@@ -279,7 +277,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
     }
 ```
 
-##Download the results **when the job is not yet completed**:
+## Download the results **when the job is not yet completed**:
   Returns status [200]
 ```javascript
     {
@@ -294,7 +292,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 ---------------------------------------------------------
 
 
-##Accepted CSV Fields: {#acceptedfields}
+## Accepted CSV Fields: {#acceptedfields}
 
 The CSV must contain a header row which consists of field names matching those listed below.
 
@@ -326,7 +324,7 @@ custom_ | Any header starting with "custom_" \*
 \* Custom Headers:  will be passed through from the input file into the results file in the correct position
 
 
-##Categories
+## Categories
 
 <table border=1>
       <tbody>
