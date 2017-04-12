@@ -21,8 +21,6 @@ We recommend only contacting results with the following properties:
 2. subscriber_email_status of 'verified'
 3. No blacklist hits (examine the following fields: subscriber_email_is_blacklisted, subscriber_email_domain_is_blacklisted, subscriber_signup_domain_is_blacklisted, subscriber_signup_ip_is_blacklisted)
 
-\pagebreak
-
 ##File Format:
 
 Any file being uploaded must be a correctly formatted Comma Separated Value file (CSV) using *UTF-8 encoding*. See [RFC 4180](http://tools.ietf.org/html/rfc4180). At a minimum, Email is required. We suggest including CAN-SPAM required fields and the API Key can be configured to enforce those requirements. For a list of allowed fields and their descriptions see [Accepted CSV Fields](#acceptedfields).
@@ -50,7 +48,6 @@ We have a desktop application available for formatting CSV files available (cont
 7. Do not send the string "NULL" if you do not have a value for a field. Just send an empty value.
 8. Be careful with time stamps and dates. If you're storing your time stamps and dates as a unix time integer, make sure to *not* send 1970-01-01 00:00:00. Just send an empty value
 
-\pagebreak
 
 ##Endpoints:
 
@@ -77,7 +74,6 @@ Any error, no matter the HTTP code, should return a JSON object in the form:
         }
 ```
 
-\pagebreak
 
 ##List all Jobs [200]:
   No Jobs:
@@ -122,7 +118,6 @@ Any error, no matter the HTTP code, should return a JSON object in the form:
 >  * paused
 >  * pending
 
-\pagebreak
 
 ##Create a new job:
 
@@ -136,25 +131,6 @@ Parts of the POST operation:
 4. the file, which must be of type "text/csv" (required)
 5. The **"x-authorization" HTTP header** must be set for all operations. The value of this field is the API Key Authentication Token
 
-###Example form
-
-In all likelyhood you will not have a real form, but will be submitting the file programmatically. This example is just to indicate how the content of the POST might be constructed. It does *not* set the correct 'x-authorization' HTTP header value.
-
-```html
-<form action="http://api.example.com:8080/api/live/bulk" method="POST" enctype="multipart/form-data">
-  <select name="export_type" id="export_type">
-    <option value="multi">Export mutiple files segmented by score</option>
-    <option value="single">Export a single 'results.csv' file</option>
-  </select>
-  <!-- Send an email to 'test@example.com' when the job is complete -->
-  <input type="text" name="notify_email" id="notify_email" value="test@example.com" />
-  <!-- Stop processing if the job runs for more than 6 hours -->
-  <input type="text" name="max_verify_hours" id="max_verify_hours" value="6" />
-  <input type="file" name="file" id="file" />
-</form>
-```
-
-\pagebreak
 
 ###Responses
 
@@ -211,14 +187,13 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 >  * missing
 >  * out_of_credits
 
-\pagebreak
 
 ##Get the status of a Job:
   Failure [404] if the job is not found:
 ```javascript
     {
       "status" : "error",
-      "error" " "not_found",
+      "error" : "not_found",
       "msg" : "Cannot find job ID"
     }
 ```
@@ -250,7 +225,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 ```javascript
     {
       "status" : "error",
-      "error" " "not_found",
+      "error" : "not_found",
       "msg" : "Cannot find job ID"
     }
 ```
@@ -270,14 +245,12 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
     }
 ```
 
-\pagebreak
-
 ##Download the results **when the job is completed**:
   Failure [404] - Job not found
 ```javascript
     {
       "status" : "error",
-      "error" " "not_found",
+      "error" : "not_found",
       "msg" : "Cannot find job results file for ID"
     }
 ```
@@ -285,7 +258,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 ```javascript
     {
       "status" : "error",
-      "error" " "already_deleted",
+      "error" : "already_deleted",
       "msg" : "Files for ID already deleted"
     }
 ```
@@ -293,7 +266,7 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 ```javascript
     {
       "status" : "error",
-      "error" " "not_ready",
+      "error" : "not_ready",
       "msg" : "File is not available for download until the job has completed"
     }
 ```
@@ -301,12 +274,10 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 ```javascript
     {
       "status" : "error",
-      "error" " "conflict",
+      "error" : "conflict",
       "msg" : "File not available for this job type"
     }
 ```
-
-\pagebreak
 
 ##Download the results **when the job is not yet completed**:
   Returns status [200]
@@ -321,9 +292,6 @@ An error should always contain 'status' as 'error', the 'error' code and a reada
 
 
 ---------------------------------------------------------
-
-
-\pagebreak
 
 
 ##Accepted CSV Fields: {#acceptedfields}
@@ -357,7 +325,6 @@ custom_ | Any header starting with "custom_" \*
 
 \* Custom Headers:  will be passed through from the input file into the results file in the correct position
 
-\pagebreak
 
 ##Categories
 
